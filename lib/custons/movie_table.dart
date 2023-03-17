@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:onde_assistir/api/moviesdb.dart';
+import 'package:onde_assistir/models/arguments.dart';
 import 'package:onde_assistir/models/movie.dart';
 
 class MovieTable extends StatelessWidget {
-  const MovieTable({Key? key, required this.movies}) : super(key: key);
+  MovieTable({Key? key, required this.movies}) : super(key: key);
 
   final List<Movie> movies;
   final String img = 'https://image.tmdb.org/t/p/w500';
+  final Moviesdb moviesController = Moviesdb();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,8 @@ class MovieTable extends StatelessWidget {
       children: [
         SizedBox(
           height: 275,
-          child: GridView.builder(physics: const BouncingScrollPhysics(),
+          child: GridView.builder(
+              physics: const BouncingScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
                 crossAxisSpacing: 0,
@@ -25,7 +29,15 @@ class MovieTable extends StatelessWidget {
               padding: const EdgeInsets.all(5),
               itemCount: movies.length,
               itemBuilder: (context, index) {
-                return InkWell(onTap: () {},
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(
+                        context,
+                        '/movie',
+                        arguments: Arguments(
+                            movie: movies[index])
+                    );
+                  },
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -35,8 +47,7 @@ class MovieTable extends StatelessWidget {
                         height: 220,
                         width: 190,
                         child: Image.network('$img${movies[index].posterPath}',
-                            fit: BoxFit.fitWidth,
-                            alignment: Alignment.center),
+                            fit: BoxFit.fitWidth, alignment: Alignment.center),
                       ),
                       SizedBox(
                           height: 25,

@@ -11,7 +11,7 @@ class Popular extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: moviesController.getMoviesLatest(),
+      future: moviesController.getMoviesPopular(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
