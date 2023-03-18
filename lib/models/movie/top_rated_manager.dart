@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/api/moviesdb.dart';
-import 'package:onde_assistir/models/movie.dart';
-import 'package:onde_assistir/custons/movie_table.dart';
+import 'package:onde_assistir/models/movie/movie.dart';
+import 'package:onde_assistir/models/movie/movie_table.dart';
 
-class TopRated extends StatelessWidget {
-  TopRated({Key? key}) : super(key: key);
+class TopRatedManager extends StatelessWidget {
+  TopRatedManager({Key? key}) : super(key: key);
 
   final Moviesdb moviesController = Moviesdb();
 

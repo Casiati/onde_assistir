@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/models/arguments.dart';
 import 'package:onde_assistir/pages/movie.dart';
+import 'package:onde_assistir/pages/search.dart';
 
 import 'pages/home.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
       ),
       onGenerateRoute: (settings) {
         switch (settings.name) {
@@ -29,6 +30,10 @@ class MyApp extends StatelessWidget {
               builder: (_) => MoviesPage(
                 settings.arguments as Arguments
               ),
+            );
+          case '/search':
+            return MaterialPageRoute(
+              builder: (_) => const SearchPage(),
             );
         }
         return null;

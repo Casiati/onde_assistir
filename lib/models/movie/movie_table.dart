@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/api/moviesdb.dart';
 import 'package:onde_assistir/models/arguments.dart';
-import 'package:onde_assistir/models/movie.dart';
+import 'package:onde_assistir/models/movie/movie.dart';
 
 class MovieTable extends StatelessWidget {
   MovieTable({Key? key, required this.movies}) : super(key: key);
@@ -26,29 +26,37 @@ class MovieTable extends StatelessWidget {
                 mainAxisSpacing: 0,
               ),
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(5),
               itemCount: movies.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    Navigator.pushNamed(
-                        context,
-                        '/movie',
-                        arguments: Arguments(
-                            movie: movies[index])
-                    );
+                    Navigator.pushNamed(context, '/movie',
+                        arguments: Arguments(movie: movies[index]));
                   },
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                              image: (movies[index].posterPath != null)
+                                  ? NetworkImage(
+                                      '$img${movies[index].posterPath}',
+                                    )
+                                  : const NetworkImage(
+                                      'https://www2.camara.leg.br/atividade-'
+                                          'legislativa/comissoes/comissoes-'
+                                          'permanentes/cindra/imagens/'
+                                          'sem.jpg.gif'),
+                              fit: BoxFit.fill),
+                        ),
                         height: 220,
                         width: 190,
-                        child: Image.network('$img${movies[index].posterPath}',
-                            fit: BoxFit.fitWidth, alignment: Alignment.center),
                       ),
+                      const SizedBox(height: 5),
                       SizedBox(
                           height: 25,
                           child: Text(

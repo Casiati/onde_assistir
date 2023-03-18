@@ -1,4 +1,4 @@
-import 'package:onde_assistir/models/movie.dart';
+import 'package:onde_assistir/models/movie/movie.dart';
 
 class Arguments {
   late Movie movie;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/api/moviesdb.dart';
-import 'package:onde_assistir/custons/provider_table.dart';
-import 'package:onde_assistir/models/provider.dart';
+import 'package:onde_assistir/models/provider/provider_table.dart';
+import 'package:onde_assistir/models/provider/provider.dart';
 
 class ProvidersManager extends StatelessWidget {
   ProvidersManager(this.movieId, {Key? key}) : super(key: key);
@@ -32,17 +32,40 @@ class ProvidersManager extends StatelessWidget {
             if (snapshot.hasError) {
               return Container();
             } else {
+              final providerA = <ProviderA>[];
+              final providerB = <ProviderB>[];
+              final providerC = <ProviderC>[];
               var jProvider = snapshot.data;
               if (jProvider!['results']['BR'] != null) {
-                List listReponse = jProvider['results']['BR']['flatrate'];
-                final provider = <Provider>[];
-                for (Map<String, dynamic> map in listReponse) {
-                  Provider p = Provider.fromJson(map);
-                  provider.add(p);
+                if (jProvider['results']['BR']['flatrate'] != null) {
+                  List listReponseA = jProvider['results']['BR']['flatrate'];
+                  for (Map<String, dynamic> map in listReponseA) {
+                    ProviderA p = ProviderA.fromJson(map);
+                    providerA.add(p);
+                  }
+                  if (jProvider['results']['BR']['buy'] != null) {
+                    List listReponseB = jProvider['results']['BR']['buy'];
+                    for (Map<String, dynamic> map in listReponseB) {
+                      ProviderB p = ProviderB.fromJson(map);
+                      providerB.add(p);
+                    }
+                  }
+                  if (jProvider['results']['BR']['rent'] != null) {
+                    List listReponseC = jProvider['results']['BR']['rent'];
+                    for (Map<String, dynamic> map in listReponseC) {
+                      ProviderC p = ProviderC.fromJson(map);
+                      providerC.add(p);
+                    }
+                  }
                 }
-                return ProviderTable(provider: provider);
+                return ProviderTable(
+                  providerA: providerA,
+                  providerB: providerB,
+                  providerC: providerC,
+                );
               } else {
-                return const SizedBox(height: 60,
+                return const SizedBox(
+                  height: 60,
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/api/moviesdb.dart';
-import 'package:onde_assistir/models/popular/popular.dart';
-import 'package:onde_assistir/models/top_rated/top_rated.dart';
+import '../models/movie/popular_manager.dart';
+import '../models/movie/top_rated_manager.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({
@@ -16,6 +16,13 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text('Filmes'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/search');
+              },
+              icon: const Icon(Icons.search))
+        ],
       ),
       body: Center(
         child: ListView(
@@ -32,7 +39,7 @@ class HomePage extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            TopRated(),
+            TopRatedManager(),
             const SizedBox(
               height: 15,
             ),
@@ -43,7 +50,10 @@ class HomePage extends StatelessWidget {
                   fontSize: 25,
                   fontWeight: FontWeight.bold),
             ),
-            Popular(),
+            const SizedBox(
+              height: 15,
+            ),
+            PopularManager(),
           ],
         ),
       ),

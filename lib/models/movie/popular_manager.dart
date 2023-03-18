@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/api/moviesdb.dart';
-import 'package:onde_assistir/custons/movie_table.dart';
-import 'package:onde_assistir/models/movie.dart';
+import 'package:onde_assistir/models/movie/movie_table.dart';
+import 'package:onde_assistir/models/movie/movie.dart';
 
-class Popular extends StatelessWidget {
-  Popular({Key? key}) : super(key: key);
+class PopularManager extends StatelessWidget {
+  PopularManager({Key? key}) : super(key: key);
 
   final Moviesdb moviesController = Moviesdb();
 

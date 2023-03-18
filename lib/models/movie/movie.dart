@@ -23,7 +23,7 @@ class Movie {
   late final String originalTitle;
   late final String overview;
   late final double popularity;
-  late final String posterPath;
+  String? posterPath;
   late final String releaseDate;
   late final String title;
   late final bool video;

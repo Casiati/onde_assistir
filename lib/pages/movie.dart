@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/models/arguments.dart';
-import 'package:onde_assistir/models/providers_manager.dart';
+import 'package:onde_assistir/models/provider/providers_manager.dart';
 
 class MoviesPage extends StatelessWidget {
   const MoviesPage(
@@ -30,7 +30,12 @@ class MoviesPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                    image: NetworkImage('$img${arguments.movie.backdropPath}'),
+                    image: (arguments.movie.backdropPath != null)
+                        ? NetworkImage('$img${arguments.movie.backdropPath}')
+                        : const NetworkImage(
+                            'https://st.depositphotos.com/1000350'
+                            '/2282/i/450/depositphotos_22823894-stock-photo-dark'
+                            '-concrete-texture.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -66,8 +71,14 @@ class MoviesPage extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               image: DecorationImage(
-                                image: NetworkImage(
-                                    '$img${arguments.movie.posterPath}'),
+                                image: (arguments.movie.posterPath != null)
+                                    ? NetworkImage(
+                                        '$img${arguments.movie.posterPath}')
+                                    : const NetworkImage(
+                                        'https://www2.camara.leg.br/atividade-'
+                                        'legislativa/comissoes/comissoes-'
+                                        'permanentes/cindra/imagens/'
+                                        'sem.jpg.gif'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -85,8 +96,8 @@ class MoviesPage extends StatelessWidget {
                                   (arguments.movie.overview != "")
                                       ? arguments.movie.overview
                                       : 'Não temos uma sinopse em Português do '
-                                      'Brasil. Você pode ajudar a ampliar o '
-                                      'nosso banco de dados adicionando uma.',
+                                          'Brasil. Você pode ajudar a ampliar o '
+                                          'nosso banco de dados adicionando uma.',
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -115,7 +126,7 @@ class MoviesPage extends StatelessWidget {
                                         width: 50,
                                         child: Center(
                                           child: Text(
-                                            '${arguments.movie.voteAverage.toString().replaceAll('.', '')}%',
+                                            '${arguments.movie.voteAverage.toStringAsFixed(1).replaceAll('.', '')}%',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -125,18 +136,26 @@ class MoviesPage extends StatelessWidget {
                                                   blurRadius: 15,
                                                   color: (arguments.movie
                                                               .voteAverage >=
-                                                          5)
+                                                          7)
                                                       ? Colors.green
-                                                      : Colors.red,
+                                                      : (arguments.movie
+                                                                  .voteAverage <=
+                                                              5)
+                                                          ? Colors.red
+                                                          : Colors.yellow,
                                                 ),
                                                 Shadow(
                                                   offset: const Offset(1, 1),
                                                   blurRadius: 15,
                                                   color: (arguments.movie
                                                               .voteAverage >=
-                                                          5)
+                                                          7)
                                                       ? Colors.green
-                                                      : Colors.red,
+                                                      : (arguments.movie
+                                                                  .voteAverage <=
+                                                              5)
+                                                          ? Colors.red
+                                                          : Colors.yellow,
                                                 )
                                               ],
                                             ),
@@ -166,27 +185,12 @@ class MoviesPage extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                const Text(
-                                  'Assita Agora:',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    shadows: [
-                                      Shadow(
-                                        offset: Offset(1, 1),
-                                        blurRadius: 8,
-                                        color: Colors.black,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                ProvidersManager(arguments.movie.id),
                               ],
                             ),
                           ),
                         ],
-                      )
+                      ),
+                      ProvidersManager(arguments.movie.id),
                     ],
                   ),
                 ),
