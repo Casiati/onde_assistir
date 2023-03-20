@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/api/moviesdb.dart';
 import 'package:onde_assistir/models/movie/movie.dart';
-import 'package:onde_assistir/models/movie/search/search_movie_table.dart';
 
-class SearchManager extends StatelessWidget {
-  SearchManager({Key? key, required this.query}) : super(key: key);
+import 'search/search_movie_table.dart';
+
+class SimilarManager extends StatelessWidget {
+  SimilarManager(this.movieId, {Key? key}) : super(key: key);
 
   final Moviesdb moviesController = Moviesdb();
-  final String query;
+  final int movieId;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: moviesController.getSearchMovie(query),
+      future: moviesController.getSimilar(movieId),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -22,7 +23,8 @@ class SearchManager extends StatelessWidget {
               height: 200,
               alignment: Alignment.center,
               child: const CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                valueColor:
+                AlwaysStoppedAnimation<Color>(Colors.white),
                 strokeWidth: 5,
               ),
             );
@@ -30,19 +32,15 @@ class SearchManager extends StatelessWidget {
             if (snapshot.hasError) {
               return Container();
             } else {
-              if (snapshot.data != null) {
-                List listResponse = snapshot.data!['results'];
-                final movie = <Movie>[];
-                for (Map<String, dynamic> map in listResponse) {
-                  Movie m = Movie.fromJson(map);
-                  movie.add(m);
-                }
-                return SearchMovieTable(
-                  movies: movie,
-                );
-              } else {
-                return Container();
+              List listResponse = snapshot.data!['results'];
+              final movie = <Movie>[];
+              for (Map<String, dynamic> map in listResponse) {
+                Movie m = Movie.fromJson(map);
+                movie.add(m);
               }
+              return SearchMovieTable(
+                movies: movie,
+              );
             }
         }
       },

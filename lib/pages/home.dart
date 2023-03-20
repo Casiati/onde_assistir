@@ -26,8 +26,6 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: ListView(
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
           children: <Widget>[
             const Padding(
               padding: EdgeInsets.all(8.0),
@@ -43,12 +41,15 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            const Text(
-              'Mais Assistidos',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
+            const Padding(
+              padding: EdgeInsets.only(left: 8),
+              child: Text(
+                'Mais Assistidos',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             const SizedBox(
               height: 15,

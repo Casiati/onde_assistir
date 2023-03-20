@@ -12,68 +12,63 @@ class MovieTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(
-          height: 275,
-          child: GridView.builder(
-              physics: const BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                crossAxisSpacing: 0,
-                mainAxisSpacing: 0,
-              ),
-              scrollDirection: Axis.horizontal,
-              itemCount: movies.length,
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/movie',
-                        arguments: Arguments(movie: movies[index]));
-                  },
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              image: (movies[index].posterPath != null)
-                                  ? NetworkImage(
-                                      '$img${movies[index].posterPath}',
-                                    )
-                                  : const NetworkImage(
-                                      'https://www2.camara.leg.br/atividade-'
-                                          'legislativa/comissoes/comissoes-'
-                                          'permanentes/cindra/imagens/'
-                                          'sem.jpg.gif'),
-                              fit: BoxFit.fill),
+    return SizedBox(height: 220,
+      child: GridView.builder(shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1,
+            crossAxisSpacing: 0,
+            mainAxisSpacing: 5,
+          ),
+          scrollDirection: Axis.horizontal,
+          itemCount: movies.length,
+          padding: const EdgeInsets.all(4),
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, '/movie',
+                    arguments: Arguments(movie: movies[index]));
+              },
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                                image: (movies[index].posterPath != null)
+                                    ? NetworkImage(
+                                        '$img${movies[index].posterPath}',
+                                      )
+                                    : const NetworkImage(
+                                        'https://www2.camara.leg.br/atividade-'
+                                            'legislativa/comissoes/comissoes-'
+                                            'permanentes/cindra/imagens/'
+                                            'sem.jpg.gif'),
+                                fit: BoxFit.fill),
+                          ),
+                          width: 150,
                         ),
-                        height: 220,
-                        width: 190,
                       ),
-                      const SizedBox(height: 5),
-                      SizedBox(
-                          height: 25,
-                          child: Text(
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            movies[index].title,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              color: Colors.white,
-                            ),
-                          )),
-                    ],
+                    ),
                   ),
-                );
-              }),
-        ),
-      ],
+                  const SizedBox(height: 10),
+                  // Text(textAlign: TextAlign.center,
+                  //   overflow: TextOverflow.ellipsis,
+                  //   maxLines: 2,
+                  //   movies[index].title,
+                  //   style: const TextStyle(
+                  //     fontSize: 15,
+                  //     color: Colors.white,
+                  //   ),
+                  // ),
+                ],
+              ),
+            );
+          }),
     );
   }
 }

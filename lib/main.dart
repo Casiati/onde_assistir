@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.indigo,
+        cardColor: Colors.indigo,
       ),
       onGenerateRoute: (settings) {
         switch (settings.name) {
@@ -27,9 +28,7 @@ class MyApp extends StatelessWidget {
             );
           case '/movie':
             return MaterialPageRoute(
-              builder: (_) => MoviesPage(
-                settings.arguments as Arguments
-              ),
+              builder: (_) => MoviesPage(settings.arguments as Arguments),
             );
           case '/search':
             return MaterialPageRoute(
