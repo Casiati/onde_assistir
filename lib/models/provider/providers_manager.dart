@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/api/moviesdb.dart';
+import 'package:onde_assistir/api/seriesdb.dart';
+import 'package:onde_assistir/models/arguments.dart';
 import 'package:onde_assistir/models/provider/provider_table.dart';
 import 'package:onde_assistir/models/provider/provider.dart';
 
 class ProvidersManager extends StatelessWidget {
-  ProvidersManager(this.movieId, {Key? key}) : super(key: key);
+  ProvidersManager(this.arguments, {Key? key}) : super(key: key);
 
-  final int movieId;
   final Moviesdb moviesController = Moviesdb();
+  final Seriesdb seriesController = Seriesdb();
+  final Arguments arguments;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: moviesController.getProvider(movieId),
+      future: (arguments.results.video != null)
+          ? moviesController.getProvider(arguments.results.id)
+          : seriesController.getProvider(arguments.results.id),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:

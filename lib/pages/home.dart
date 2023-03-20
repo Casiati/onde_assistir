@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/api/moviesdb.dart';
-import '../models/movie/popular_manager.dart';
-import '../models/movie/top_rated_manager.dart';
+import 'package:onde_assistir/pages/movies.dart';
+import 'package:onde_assistir/pages/series.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({
@@ -12,49 +12,38 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: const Text('Filmes'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/search');
-              },
-              icon: const Icon(Icons.search))
-        ],
-      ),
-      body: Center(
-        child: ListView(
-          children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Melhores Avaliados',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          title: const Text('Onde Assistir'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/search');
+                },
+                icon: const Icon(Icons.search))
+          ],
+          bottom: const TabBar(
+            physics: BouncingScrollPhysics(),
+            isScrollable: true,
+            labelStyle: TextStyle(fontSize: 18),
+            indicatorSize: TabBarIndicatorSize.label,
+            tabs: [
+              Tab(
+                text: 'Filmes',
               ),
-            ),
-            TopRatedManager(),
-            const SizedBox(
-              height: 15,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 8),
-              child: Text(
-                'Mais Assistidos',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
+              Tab(
+                text: 'Series',
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            PopularManager(),
+            ],
+          ),
+        ),
+        body: const TabBarView(
+          children: [
+            MoviesPage(),
+            SeriesPage(),
           ],
         ),
       ),

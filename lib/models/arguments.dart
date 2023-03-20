@@ -1,7 +1,7 @@
-import 'package:onde_assistir/models/movie/movie.dart';
+import 'package:onde_assistir/models/results.dart';
 
 class Arguments {
-  late Movie movie;
+  late Results results;
 
-  Arguments({required this.movie,});
+  Arguments({required this.results,});
 }

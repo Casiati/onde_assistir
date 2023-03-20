@@ -1,8 +1,8 @@
-class Movie {
-  Movie({
+class Results {
+  Results({
     required this.adult,
     required this.backdropPath,
-    required this.genreIds,
+    //required this.genreIds,
     required this.id,
     required this.originalLanguage,
     required this.originalTitle,
@@ -15,25 +15,23 @@ class Movie {
     required this.voteAverage,
     required this.voteCount,
   });
-  late final bool adult;
+  late final bool? adult;
   late final String? backdropPath;
-  late final List<int> genreIds;
   late final int id;
-  late final String originalLanguage;
-  late final String originalTitle;
-  late final String overview;
+  late final String? originalLanguage;
+  late final String? originalTitle;
+  late final String? overview;
   late final double popularity;
   String? posterPath;
-  late final String releaseDate;
+  late final String? releaseDate;
   late final String title;
-  late final bool video;
-  late final num voteAverage;
-  late final int voteCount;
+  late final bool? video;
+  late final num? voteAverage;
+  late final int? voteCount;
 
-  Movie.fromJson(Map<String, dynamic> json) {
+  Results.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
-    genreIds = List.castFrom<dynamic, int>(json['genre_ids']);
     id = json['id'];
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
@@ -51,7 +49,6 @@ class Movie {
     final data = <String, dynamic>{};
     data['adult'] = adult;
     data['backdrop_path'] = backdropPath;
-    data['genre_ids'] = genreIds;
     data['id'] = id;
     data['original_language'] = originalLanguage;
     data['original_title'] = originalTitle;

@@ -7,10 +7,11 @@ class Moviesdb {
 
   Future<Map> getMoviesTopRated() async {
     http.Response response;
-    var url = Uri.parse('${api.movies}top_rated?${api.key}&${api.language}&page=1');
+    var url = Uri.parse('${api.movies}top_rated?${api.key}&${api.language}&region=BR');
     response = await http.get(url);
     return json.decode(response.body);
   }
+
 
   Future<Map> getMoviesPopular() async {
     http.Response response;
@@ -26,18 +27,18 @@ class Moviesdb {
     return json.decode(response.body);
   }
 
-  Future<Map> getSimilar(movieId) async {
+  Future<Map> getRecommendations(movieId) async {
     http.Response response;
-    var url = Uri.parse('${api.movies}$movieId/similar?${api.key}&${api.language}');
+    var url = Uri.parse('${api.movies}$movieId/recommendations?${api.key}&${api.language}&region=BR');
     response = await http.get(url);
     return json.decode(response.body);
   }
 
-  Future<Map> getSearchMovie(String query) async {
+  Future<Map> getSearch(String query) async {
     http.Response response;
     var url = Uri.parse(
         '${api.search}${api.key}&${api.language}&query=$query&include_adult=false&region=BR');
     response = await http.get(url);
-    return json.decode(response.body);
+    return json.decode(response.body.replaceAll('name', 'title'));
   }
 }

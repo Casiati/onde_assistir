@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:onde_assistir/models/movie/search/search_manager.dart';
+import 'package:onde_assistir/models/search/search_manager.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);

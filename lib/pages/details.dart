@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/custons/custom_alert.dart';
 import 'package:onde_assistir/models/arguments.dart';
-import 'package:onde_assistir/models/movie/similar_manager.dart';
+import 'package:onde_assistir/models/movie/recommendations_manager.dart';
 import 'package:onde_assistir/models/provider/providers_manager.dart';
 
-class MoviesPage extends StatelessWidget {
-  const MoviesPage(
+class DetailsPage extends StatelessWidget {
+  const DetailsPage(
     this.arguments, {
     Key? key,
   }) : super(key: key);
@@ -20,7 +20,7 @@ class MoviesPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Filmes'),
+        title: Text(arguments.results.title),
       ),
       body: ListView(
         shrinkWrap: true,
@@ -32,8 +32,8 @@ class MoviesPage extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
-                  image: (arguments.movie.backdropPath != null)
-                      ? NetworkImage('$img${arguments.movie.backdropPath}')
+                  image: (arguments.results.backdropPath != null)
+                      ? NetworkImage('$img${arguments.results.backdropPath}')
                       : const NetworkImage(
                           'https://st.depositphotos.com/1000350'
                           '/2282/i/450/depositphotos_22823894-stock-photo-dark'
@@ -51,7 +51,7 @@ class MoviesPage extends StatelessWidget {
                       maxLines: 2,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
-                      arguments.movie.title,
+                      arguments.results.title,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -75,9 +75,9 @@ class MoviesPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             image: DecorationImage(
-                              image: (arguments.movie.posterPath != null)
+                              image: (arguments.results.posterPath != null)
                                   ? NetworkImage(
-                                      '$img${arguments.movie.posterPath}')
+                                      '$img${arguments.results.posterPath}')
                                   : const NetworkImage(
                                       'https://www2.camara.leg.br/atividade-'
                                       'legislativa/comissoes/comissoes-'
@@ -96,21 +96,21 @@ class MoviesPage extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  if (arguments.movie.overview != '') {
+                                  if (arguments.results.overview != '') {
                                     showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
                                           return CustomAlert(
                                               sinopse:
-                                                  arguments.movie.overview);
+                                                  arguments.results.overview!);
                                         });
                                   }
                                 },
                                 child: Text(
                                   maxLines: 8,
                                   overflow: TextOverflow.ellipsis,
-                                  (arguments.movie.overview != "")
-                                      ? arguments.movie.overview
+                                  (arguments.results.overview != "")
+                                      ? arguments.results.overview!
                                       : 'Não temos uma sinopse em Português do '
                                           'Brasil. Você pode ajudar a ampliar o '
                                           'nosso banco de dados adicionando uma.',
@@ -164,7 +164,7 @@ class MoviesPage extends StatelessWidget {
                                       width: 50,
                                       child: Center(
                                         child: Text(
-                                          '${arguments.movie.voteAverage.toStringAsFixed(1).replaceAll('.', '')}%',
+                                          '${arguments.results.voteAverage!.toStringAsFixed(1).replaceAll('.', '')}%',
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -172,12 +172,12 @@ class MoviesPage extends StatelessWidget {
                                               Shadow(
                                                 offset: const Offset(2, 3),
                                                 blurRadius: 15,
-                                                color: (arguments.movie
-                                                            .voteAverage >=
+                                                color: (arguments.results
+                                                            .voteAverage! >=
                                                         7)
                                                     ? Colors.green
-                                                    : (arguments.movie
-                                                                .voteAverage <=
+                                                    : (arguments.results
+                                                                .voteAverage! <=
                                                             5)
                                                         ? Colors.red
                                                         : Colors.yellow,
@@ -185,12 +185,12 @@ class MoviesPage extends StatelessWidget {
                                               Shadow(
                                                 offset: const Offset(1, 1),
                                                 blurRadius: 15,
-                                                color: (arguments.movie
-                                                            .voteAverage >=
+                                                color: (arguments.results
+                                                            .voteAverage! >=
                                                         7)
                                                     ? Colors.green
-                                                    : (arguments.movie
-                                                                .voteAverage <=
+                                                    : (arguments.results
+                                                                .voteAverage! <=
                                                             5)
                                                         ? Colors.red
                                                         : Colors.yellow,
@@ -208,7 +208,7 @@ class MoviesPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    ProvidersManager(arguments.movie.id),
+                    ProvidersManager(arguments),
                   ],
                 ),
               ),
@@ -227,7 +227,7 @@ class MoviesPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: SimilarManager(arguments.movie.id),
+            child: RecommendationsManager(arguments),
           ),
         ],
       ),

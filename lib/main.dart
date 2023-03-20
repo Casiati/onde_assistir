@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/models/arguments.dart';
-import 'package:onde_assistir/pages/movie.dart';
+import 'package:onde_assistir/pages/details.dart';
 import 'package:onde_assistir/pages/search.dart';
 
 import 'pages/home.dart';
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp(debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.indigo,
@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(
               builder: (_) => HomePage(),
             );
-          case '/movie':
+          case '/details':
             return MaterialPageRoute(
-              builder: (_) => MoviesPage(settings.arguments as Arguments),
+              builder: (_) => DetailsPage(settings.arguments as Arguments),
             );
           case '/search':
             return MaterialPageRoute(

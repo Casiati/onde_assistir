@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:onde_assistir/api/moviesdb.dart';
 import 'package:onde_assistir/models/arguments.dart';
-import 'package:onde_assistir/models/movie/movie.dart';
+import 'package:onde_assistir/models/results.dart';
 
-class MovieTable extends StatelessWidget {
-  MovieTable({Key? key, required this.movies}) : super(key: key);
+class ResultsTable extends StatelessWidget {
+  const ResultsTable({Key? key, required this.results}) : super(key: key);
 
-  final List<Movie> movies;
+  final List<Results> results;
   final String img = 'https://image.tmdb.org/t/p/w500';
-  final Moviesdb moviesController = Moviesdb();
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +19,13 @@ class MovieTable extends StatelessWidget {
             mainAxisSpacing: 5,
           ),
           scrollDirection: Axis.horizontal,
-          itemCount: movies.length,
+          itemCount: results.length,
           padding: const EdgeInsets.all(4),
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                Navigator.pushNamed(context, '/movie',
-                    arguments: Arguments(movie: movies[index]));
+                Navigator.pushNamed(context, '/details',
+                    arguments: Arguments(results: results[index]));
               },
               child: Column(
                 children: [
@@ -37,11 +35,11 @@ class MovieTable extends StatelessWidget {
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(2),
                             image: DecorationImage(
-                                image: (movies[index].posterPath != null)
+                                image: (results[index].posterPath != null)
                                     ? NetworkImage(
-                                        '$img${movies[index].posterPath}',
+                                        '$img${results[index].posterPath}',
                                       )
                                     : const NetworkImage(
                                         'https://www2.camara.leg.br/atividade-'

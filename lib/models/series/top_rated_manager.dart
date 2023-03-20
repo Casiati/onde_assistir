@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:onde_assistir/api/moviesdb.dart';
+import 'package:onde_assistir/api/seriesdb.dart';
 import 'package:onde_assistir/models/results.dart';
 import 'package:onde_assistir/models/results_table.dart';
 
-class MovieTopRatedManager extends StatelessWidget {
-  MovieTopRatedManager({Key? key}) : super(key: key);
+class SeriesTopRatedManager extends StatelessWidget {
+  SeriesTopRatedManager({Key? key}) : super(key: key);
 
-  final Moviesdb moviesController = Moviesdb();
+  final Seriesdb seriesdbController = Seriesdb();
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: moviesController.getMoviesTopRated(),
+      future: seriesdbController.getSeriesTopRated(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:

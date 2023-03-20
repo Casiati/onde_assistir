@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/api/moviesdb.dart';
-import 'package:onde_assistir/models/movie/movie.dart';
-import 'package:onde_assistir/models/movie/search/search_movie_table.dart';
+import 'package:onde_assistir/models/results.dart';
+
+import 'search_table.dart';
 
 class SearchManager extends StatelessWidget {
   SearchManager({Key? key, required this.query}) : super(key: key);
@@ -12,7 +13,7 @@ class SearchManager extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: moviesController.getSearchMovie(query),
+      future: moviesController.getSearch(query),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -32,13 +33,13 @@ class SearchManager extends StatelessWidget {
             } else {
               if (snapshot.data != null) {
                 List listResponse = snapshot.data!['results'];
-                final movie = <Movie>[];
+                final results = <Results>[];
                 for (Map<String, dynamic> map in listResponse) {
-                  Movie m = Movie.fromJson(map);
-                  movie.add(m);
+                  Results m = Results.fromJson(map);
+                  results.add(m);
                 }
-                return SearchMovieTable(
-                  movies: movie,
+                return SearchTable(
+                  results: results,
                 );
               } else {
                 return Container();

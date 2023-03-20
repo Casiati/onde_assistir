@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:onde_assistir/api/moviesdb.dart';
-import 'package:onde_assistir/models/movie/movie_table.dart';
-import 'package:onde_assistir/models/movie/movie.dart';
+import 'package:onde_assistir/models/results_table.dart';
+import 'package:onde_assistir/models/results.dart';
 
-class PopularManager extends StatelessWidget {
-  PopularManager({Key? key}) : super(key: key);
+class MoviePopularManager extends StatelessWidget {
+  MoviePopularManager({Key? key}) : super(key: key);
 
   final Moviesdb moviesController = Moviesdb();
 
@@ -31,13 +31,13 @@ class PopularManager extends StatelessWidget {
               return Container();
             } else {
               List listResponse = snapshot.data!['results'];
-              final movie = <Movie>[];
+              final movie = <Results>[];
               for (Map<String, dynamic> map in listResponse) {
-                Movie m = Movie.fromJson(map);
+                Results m = Results.fromJson(map);
                 movie.add(m);
               }
-              return MovieTable(
-                movies: movie,
+              return ResultsTable(
+                results: movie,
               );
             }
         }

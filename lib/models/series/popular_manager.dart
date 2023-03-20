@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:onde_assistir/api/moviesdb.dart';
-import 'package:onde_assistir/models/movie/movie.dart';
+import 'package:onde_assistir/api/seriesdb.dart';
+import 'package:onde_assistir/models/results_table.dart';
+import 'package:onde_assistir/models/results.dart';
 
-import 'search/search_movie_table.dart';
+class SeriesPopularManager extends StatelessWidget {
+ SeriesPopularManager({Key? key}) : super(key: key);
 
-class SimilarManager extends StatelessWidget {
-  SimilarManager(this.movieId, {Key? key}) : super(key: key);
-
-  final Moviesdb moviesController = Moviesdb();
-  final int movieId;
+  final Seriesdb seriesdbController = Seriesdb();
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: moviesController.getSimilar(movieId),
+      future: seriesdbController.getSeriesPopular(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -33,13 +31,13 @@ class SimilarManager extends StatelessWidget {
               return Container();
             } else {
               List listResponse = snapshot.data!['results'];
-              final movie = <Movie>[];
+              final results = <Results>[];
               for (Map<String, dynamic> map in listResponse) {
-                Movie m = Movie.fromJson(map);
-                movie.add(m);
+                Results m = Results.fromJson(map);
+                results.add(m);
               }
-              return SearchMovieTable(
-                movies: movie,
+              return ResultsTable(
+                results: results,
               );
             }
         }
