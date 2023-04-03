@@ -1,16 +1,26 @@
 # onde_assistir
 
-A new Flutter project.
+Projeto criado no intuito de praticar o uso de API Rest
 
-## Getting Started
+- Nesse projeto estou fazendo o uso da API do [TMDB](https://www.themoviedb.org/)
 
-This project is a starting point for a Flutter application.
+# ScreenShots 
 
-A few resources to get you started if this is your first Flutter project:
+Listas
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img height="450" src="https://i.ibb.co/bjtvHxx/Screenshot-1680544694.png" alt="Screenshot-1680544694" border="0"></a>
+<img height="450" src="https://i.ibb.co/YNfSvZ2/Screenshot-1680544822.png" alt="Screenshot-1680544822" border="0"></a>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Detalhes
+
+<img height="450" src="https://i.ibb.co/YtHK5Md/Screenshot-1680544791.png" alt="Screenshot-1680544791" border="0"></a>
+<img height="450" src="https://i.ibb.co/JjNGFSt/Screenshot-1680544835.png" alt="Screenshot-1680544835" border="0"></a>
+<img height="450" src="https://i.ibb.co/gRYr9py/Screenshot-1680544841.png" alt="Screenshot-1680544841" border="0"></a>
+
+Sinopse
+
+<img height="450" src="https://i.ibb.co/BcGgLfW/Screenshot-1680545369.png" alt="Screenshot-1680545369" border="0"></a>
+
+Pesquisar
+
+<img height="450" src="https://i.ibb.co/SR9Vn4V/Screenshot-1680545356.png" alt="Screenshot-1680545356" border="0"></a>
